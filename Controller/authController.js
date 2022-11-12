@@ -3,7 +3,6 @@ const jwt = require('jsonwebtoken');
 const { Users } = require('../Models/User');
 const sendEmail = require('../utils/email');
 const crypto = require('crypto');
-const { log } = require('console');
 
 exports.protect = async (req, res, next) => {
   try {
