@@ -4,6 +4,16 @@ const { Users } = require('../Models/User');
 const sendEmail = require('../utils/email');
 const crypto = require('crypto');
 
+exports.restrictTo = (role) => (req, res, next) => {
+  if (req.user.role !== role) {
+    return res.status(403).json({
+      status: 'failed',
+      message: 'Access Denied!',
+    });
+  }
+  next();
+};
+
 exports.protect = async (req, res, next) => {
   try {
     let token;

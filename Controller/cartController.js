@@ -32,3 +32,19 @@ exports.getCart = async (req, res) => {
     });
   }
 };
+
+exports.getAllCarts = async (req, res) => {
+  try {
+    const users = await Users.find();
+    const allCarts = users.map((user) => user?.cart);
+    res.status(200).json({
+      status: 'success',
+      data: allCarts,
+    });
+  } catch (err) {
+    res.status(404).json({
+      status: 'failed',
+      message: err.message,
+    });
+  }
+};
